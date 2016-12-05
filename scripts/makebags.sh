@@ -25,7 +25,7 @@ for d in $(find $ingest -type d -not -path '*/\.*' -name 'cpb*' -maxdepth 1 -min
 		echo $f
 		file=$(echo $f | tr / '\n' | grep -vx '^$' | tail -1)
 		echo $file
-		##mediainfo -f --Language=Raw --Output=XML $f > $bags/$guid/master/${file}.mediainfo.xml
+		mediainfo -f --Language=Raw --Output=XML $f > $bags/$guid/master/${file}.mediainfo.xml
 	done
 	for m in $(find $d -type f -path '*mezz*'); do
 		echo $m
