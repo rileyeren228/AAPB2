@@ -2,19 +2,43 @@
 SAVEIFS=$IFS
 IFS=$'\n'
 
-read -p "please submit the ingest volume:	
-" p1;
-p=$(echo $p1 | tr -d ' ')
-ingest="$p"
+read -p "please submit the volume to be sorted	
+" s1;
+SIP=$(echo $s1 | tr -d ' ')
+
+read -p "please submit the folder where the files are to be organized
+" r1;
+ingest=$(echo $r1 | tr -d ' ')
 
 read -p "please submit the volume where the bags are to be written
-" r1;
-r=$(echo $r1 | tr -d ' ')
-bags="$r"
+" b1;
+bags=$(echo $b1 | tr -d ' ')
 
-mkdir $bags/audio
-mkdir $bags/video
+for f in $(find $SIP -type f \( -not -path '*/\.*' ! -name '*.md5' -name 'cpb*' \)); do
+	fb=$(basename $f)
+	guidp=${fb%.*.*}
+	mkdir $ingest/$guidp 
+	mkdir $ingest/$guidp/master && mkdir $ingest/$guidp/mezz && mkdir $ingest/$guidp/proxy
+done
 
+for master in $(find $SIP -type f -name "*.mxf"); do
+	fb=$(basename $master)
+	guidp=${fb%.*.mxf}
+	fmas=$(find $SIP -type f -name "*.mxf" -name "$guidp*") 
+	mv $fmas $ingest/$guidp/master
+done
+for mezz in $(find $SIP -type f -name "*.mov"); do
+	fb=$(basename $mezz)
+	guidp=${fb%.*.mov}
+	fmez=$(find $SIP -type f -name "*.mov" -name "$guidp*") 
+	mv $fmez $ingest/$guidp/mezz
+done
+for proxy in $(find $SIP -type f -name "*.mp4"); do
+	fb=$(basename $proxy)
+	guidp=${fb%.*.mp4}
+	fp=$(find $SIP -type f -name "*.mp4" -name "$guidp*")
+	mv $fp $ingest/$guidp/proxy
+done		
 
 for d in $(find $ingest -type d -not -path '*/\.*' -name 'cpb*' -maxdepth 1 -mindepth 1); do
 	guid=$(echo $d | tr / '\n' | grep -vx '^$' | tail -1)
