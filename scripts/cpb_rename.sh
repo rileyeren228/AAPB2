@@ -10,7 +10,7 @@ for file in $file; do
 	ID=$( echo $origname | cut -d '.' -f 1 )
 	cpb=$( grep ${ID}, $ref | cut -d , -f 1 )
 	echo $cpb
-	newname=${cpb}_${origname}
+	newname=${cpb}__${origname}
 	echo $newname
 	mv $file ./$newname
 done
