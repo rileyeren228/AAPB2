@@ -337,7 +337,10 @@ class PBCore # rubocop:disable Metrics/ClassLength
       pre_existing = pre_existing_transcript_annotation(doc_with_transcript_flag)
       pre_existing.parent.elements.delete(pre_existing) if pre_existing
 
-      transcript_body = parse_transcript_body(transcript_response.body)
+      # Commented out for testing transcript search
+      # + [transcript_body].select { |optional| optional },
+
+      # transcript_body = parse_transcript_body(transcript_response.body)
 
       REXML::XPath.match(doc_with_transcript_flag, '/*/pbcoreInstantiation').last.next_sibling.next_sibling =
         REXML::Element.new('pbcoreAnnotation').tap do |el|
@@ -351,7 +354,9 @@ class PBCore # rubocop:disable Metrics/ClassLength
       'xml' => Formatter.instance.format(doc_with_transcript_flag),
 
       # constrained searches:
-      'text' => text + [caption_body].select { |optional| optional } + [transcript_body].select { |optional| optional },
+      'text' => text + [caption_body].select { |optional| optional },
+      # Commented out for testing transcript search
+      # + [transcript_body].select { |optional| optional },
       'titles' => titles.map(&:last),
       'contribs' => contribs,
 
