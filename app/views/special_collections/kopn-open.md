@@ -2,7 +2,7 @@
 
 ## Thumbnail
 
-![Freedom Riders](https://s3.amazonaws.com/americanarchive.org/special-collections/AX0004_Freedom_Riders.jpg "Freedom Riders")
+![Liberty Bus Stalwarts of the United States](https://s3.amazonaws.com/americanarchive.org/special-collections/AX0004_Freedom_Riders.jpg "Freedom Riders")
 
 ## Summary
 
