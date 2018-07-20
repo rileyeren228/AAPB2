@@ -1,8 +1,8 @@
-# Freedom Riders Interviews
+# TEXT CHANGE TEST
 
 ## Thumbnail
 
-![Liberty Bus Stalwarts of the United States](https://s3.amazonaws.com/americanarchive.org/special-collections/AX0004_Freedom_Riders.jpg "Freedom Riders")
+![Freedom Riders](https://s3.amazonaws.com/americanarchive.org/special-collections/AX0004_Freedom_Riders.jpg "Freedom Riders")
 
 ## Summary
 
