@@ -33,12 +33,12 @@
           <article class="col-md-9">
             <h2><%= link_to_document(document, pbcore.title) %></h2>
 
-            <% pbcore.asset_dates.each do |type,date| %>
-              <%= type %>: <%= date %>,
+            <% pbcore.asset_dates.each_with_index do |date, i| %>
+              <span class="index-data-title"><%= date[0] %></span>: <%= date[1] %><% if i < (pbcore.asset_dates.length - 1) %>,<% end %>
             <% end %>
 
             <% unless pbcore.producing_organizations_facet.nil? %>
-              Producing Organization: <%= pbcore.producing_organizations_facet.join(', ') %>
+              <span class="index-data-title">Producing Organization</span>: <%= pbcore.producing_organizations_facet.join(', ') %>
             <% end %>
 
             <p><%= truncate(pbcore.descriptions[0], length: 500) + ( "..." if pbcore.descriptions[0].length > 500) %></p>
